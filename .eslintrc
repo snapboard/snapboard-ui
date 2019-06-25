@@ -1,0 +1,32 @@
+---
+  parser: babel-eslint
+
+  extends:
+    - standard
+    - standard-react
+    - react-app
+
+  plugins:
+    - emotion
+
+  env:
+    browser: true
+    jest: true
+
+  globals:
+    __DEV__:  true
+    __TEST__: true
+    __PROD__: true
+    __COVERAGE__: false
+    ENV: false
+    expect: false
+    test: false
+    describe: false
+
+  rules:
+    key-spacing: off
+    jsx-quotes: [2, prefer-single]
+    max-len: [2, 120, 2]
+    object-curly-spacing: [2, always]
+    comma-dangle: [2, always-multiline]
+    react/prop-types: [2, { skipUndeclared: true }]
