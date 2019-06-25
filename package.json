@@ -1,22 +1,22 @@
 {
   "name": "@snapboard/core",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "A library for interacting with Snapboard",
-  "main": "dist/index.js",
-  "module": "dist/esm/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/es/index.js",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "yarn clean && yarn build:cjs && yarn build:es",
-    "build:cjs": "BABEL_ENV=cjs NODE_ENV=production babel ./src --out-dir ./dist --ignore ./src/**/*.spec.js,./src/**/*.sb.js",
-    "build:es": "NODE_ENV=production babel ./src --out-dir ./dist/es --ignore ./src/**/*.spec.js,./src/**/*.sb.js",
+    "build": "yarn clean && yarn build:library",
+    "build:library": "./scripts/build-library.js",
+    "build:package": "./scripts/build-package.js",
     "clean": "rm -rf dist",
     "test": "jest",
     "test:debug": "node --inspect --inspect-brk node_modules/.bin/jest",
     "test:watch": "yarn test -- --watch",
-    "preversion": "yarn test:coverage",
     "version": "yarn build",
+    "release": "npm run build && npm run build:package && ./scripts/release.js",
     "postversion": "git push",
     "postpublish": "git push --tags",
     "coveralls": "NODE_ENV=spec nyc yarn test && nyc report --reporter=text-lcov | coveralls",
@@ -58,13 +58,15 @@
     "eslint-plugin-react": "7.12.4",
     "eslint-plugin-react-hooks": "^1.5.0",
     "eslint-plugin-standard": "^4.0.0",
+    "inquirer": "^6.4.1",
     "jest": "^24.8.0",
     "react-test-renderer": "^16.8.6",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.0.2",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.14",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "yargs": "^13.2.4"
   },
   "peerDependencies": {
     "react": "^16.8.0",
