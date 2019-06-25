@@ -1,12 +1,14 @@
 {
   "name": "@snapboard/core",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A library for interacting with Snapboard",
   "main": "./dist/index.js",
   "module": "./dist/es/index.js",
-  "files": [
-    "dist/"
-  ],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snapboard/snapboard-core.git"
+  },
   "scripts": {
     "build": "yarn clean && yarn build:library",
     "build:library": "./scripts/build-library.js",
@@ -17,8 +19,7 @@
     "test:watch": "yarn test -- --watch",
     "version": "yarn build",
     "release": "npm run build && npm run build:package && ./scripts/release.js",
-    "postversion": "git push",
-    "postpublish": "git push --tags",
+    "pack-ls": "cd dist && tar -tvf $(npm pack) && rm *.tgz",
     "coveralls": "NODE_ENV=spec nyc yarn test && nyc report --reporter=text-lcov | coveralls",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
