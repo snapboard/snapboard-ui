@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactResizeDetector from 'react-resize-detector'
 import FunnelGraph from 'funnel-graph-js'
+import isString from 'lodash/isString'
+import Color from 'color'
 import FunnelStyled from './styled'
 
 const defaults = {
@@ -8,6 +10,11 @@ const defaults = {
   subLabelValue: 'percent',
   direction: 'horizontal',
   displayPercent: true,
+}
+
+const getColors = base => {
+  if (isString(base)) return [base, Color(base).darken(0.2).rotate(20)]
+  return base
 }
 
 class Funnel extends React.Component {
@@ -19,7 +26,7 @@ class Funnel extends React.Component {
       this.graph = new FunnelGraph({
         container: '.funnel',
         ...defaults,
-        data: this.props.data,
+        data: this.format(this.props.data),
         width: this.props.width || this.size.width,
         height: this.props.height || this.size.height,
         ...options,
@@ -30,7 +37,7 @@ class Funnel extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (prevProps.data !== this.props.data) this.graph.updateData(this.props.data)
+    if (prevProps.data !== this.props.data) this.updateData(this.props.data)
     if (prevProps.options !== this.props.options) this.graph.update(this.props.options)
   }
 
@@ -40,6 +47,23 @@ class Funnel extends React.Component {
       if (width !== this.size.width) this.graph.updateWidth(width)
     }
     this.size = { width, height }
+  }
+
+  updateData (data) {
+    this.graph.updateData(this.format(data))
+    return this
+  }
+
+  format = ({ labels, datasets }) => {
+    const values = datasets.map(({ data }) => data)
+    const colors = datasets.map(({ color }) => getColors(color))
+    const subLabels = datasets.map(({ label }) => label)
+    return {
+      labels,
+      values,
+      colors,
+      subLabels,
+    }
   }
 
   render () {
