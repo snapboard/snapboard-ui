@@ -48,7 +48,7 @@ const version = fs.readJsonSync(packageJsonFile).version;
 // Check if version has previously been published
 // Note: tmpfile used to get output from npm command
 const npmVersionsFile = path.resolve(os.tmpdir(), '.npm-versions');
-exec(`echo "$(npm show @snapboard/core versions)" > ${npmVersionsFile}`);
+exec(`echo "$(npm show @snapboard/ui versions)" > ${npmVersionsFile}`);
 const versionPreviouslyPublished = fs
   .readFileSync(npmVersionsFile, { encoding: 'utf8' })
   .includes(`'${version}'`);
