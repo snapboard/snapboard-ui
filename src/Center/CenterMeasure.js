@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { withContentRect } from 'react-measure'
+import Measure from 'react-measure'
 import Center from './Center'
 
-function CenterMeasure ({ children, height, width, measureRef, contentRect, ...props }) {
-  const { bounds } = contentRect
+function CenterMeasure ({ children, autoHeight, autoWidth, height, width, ...props }) {
+  const [size, setSize] = useState({})
   return (
-    <Center width={width || bounds.width || 100} height={height || bounds.height || 100} {...props}>
-      <div ref={measureRef}>
+    <Center width={autoWidth ? null : size.width} height={autoHeight ? null : size.height}>
+      <Measure
+        bounds
+        onResize={contentRect => setSize(contentRect.bounds)}>
         {children}
-      </div>
+      </Measure>
     </Center>
   )
 }
@@ -21,8 +23,9 @@ CenterMeasure.propTypes = {
   ]),
   height: PropTypes.number,
   width: PropTypes.number,
-  measureRef: PropTypes.func,
+  autoHeight: PropTypes.bool,
+  autoWidth: PropTypes.bool,
   contentRect: PropTypes.object,
 }
 
-export default withContentRect('bounds')(CenterMeasure)
+export default CenterMeasure

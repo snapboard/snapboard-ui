@@ -1,14 +1,15 @@
 import styled from '@emotion/styled'
 
 const Center = styled('div')({
-  left: '50%',
-  top: '50%',
   position: 'absolute',
 }, ({ width, height }) => ({
-  width,
+  width: width || '100%',
+  left: width ? '50%' : 0,
+  top: height ? '50%' : 0,
+  bottom: height ? 'auto' : 0,
   height,
-  marginTop: height / -2,
-  marginLeft: width / -2,
+  marginTop: height && height / -2,
+  marginLeft: width && width / -2,
   marginBottom: 0,
   marginRight: 0,
 }))

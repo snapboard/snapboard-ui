@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react'
 // import { linkTo } from '@storybook/addon-links'
 import Card from 'util/Card'
 import Doughnut from '../Doughnut'
-import colors from 'util/colorPalette'
+// import colors from 'util/colorPalette'
 
 export const data = {
   datasets: [{
