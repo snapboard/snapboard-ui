@@ -76,7 +76,7 @@ inquirer
         console.log('Skipped publish to npm...');
       } else {
         console.log('Publishing to npm...');
-        exec(`cd dist && npm publish --tag=${npmTag}`);
+        exec(`cd dist && npm publish --tag=${npmTag} --access=public`);
       }
 
       // Push commits and tags to GitHub
