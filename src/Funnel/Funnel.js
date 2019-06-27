@@ -3,6 +3,7 @@ import ReactResizeDetector from 'react-resize-detector'
 import FunnelGraph from 'funnel-graph-js'
 import isString from 'lodash/isString'
 import Color from 'color'
+import withColors from '../util/withColors'
 import FunnelStyled from './styled'
 
 const defaults = {
@@ -13,7 +14,7 @@ const defaults = {
 }
 
 const getColors = base => {
-  if (isString(base)) return [base, Color(base).darken(0.2).rotate(20)]
+  if (isString(base)) return [Color(base).lighten(0.1), Color(base).darken(0.1).rotate(-10)]
   return base
 }
 
@@ -56,7 +57,7 @@ class Funnel extends React.Component {
 
   format = ({ labels, datasets }) => {
     const values = datasets.map(({ data }) => data)
-    const colors = datasets.map(({ color }) => getColors(color))
+    const colors = datasets.map(({ backgroundColor }) => getColors(backgroundColor))
     const subLabels = datasets.map(({ label }) => label)
     return {
       labels,
@@ -79,4 +80,4 @@ class Funnel extends React.Component {
   }
 }
 
-export default Funnel
+export default withColors({ solid: true })(Funnel)

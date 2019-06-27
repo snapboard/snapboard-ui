@@ -1,8 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import Color from 'color'
+// import Color from 'color'
 import Card from 'util/Card'
-import Funnel from '../Funnel'
+import Funnel from '../'
 // import colors from 'util/colors'
 
 // export const data = {
@@ -25,15 +25,15 @@ export const data = {
   datasets: [{
     label: 'Direct',
     data: [3500, 2500, 6500],
-    color: '#FFB178',
+    // color: '#FFB178',
   }, {
     label: 'Social Media',
     data: [3300, 1400, 1000],
-    color: '#A0BBFF',
+    // color: '#A0BBFF',
   }, {
     label: 'Ads',
     data: [600, 200, 130],
-    color: '#A0F9FF',
+    // color: '#A0F9FF',
   }],
 }
 

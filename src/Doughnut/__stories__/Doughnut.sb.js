@@ -10,11 +10,11 @@ export const data = {
   datasets: [{
     label: 'Hello',
     data: [10, 20, 30],
-    backgroundColor: colors,
+    // backgroundColor: colors,
   }, {
     label: 'World',
     data: [20, 10, 5],
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
   }],
 
   // These labels appear in the legend and in the tooltips when hovering different arcs
