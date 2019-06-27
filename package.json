@@ -87,6 +87,7 @@
     "react-chartjs-2": "^2.7.6",
     "react-measure": "^2.3.0",
     "react-resize-detector": "^4.2.0",
+    "react-table": "^6.10.0",
     "recompose": "^0.30.0"
   }
 }

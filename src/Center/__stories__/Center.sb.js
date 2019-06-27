@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Card from 'util/Card'
-import Center from '../Center'
+import Center from '../'
 
 storiesOf('Components/Center', module)
   .add('Center', () => (

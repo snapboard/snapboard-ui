@@ -22,7 +22,10 @@ class BigNumber extends React.Component {
     const primary = datasets[0]
     const secondary = datasets.slice(1).map(({ label, data }) => (
       <div css={styles.stat}>
-        {showRelative ? formatData(primary.data - data, true) : formatData(data)} <span css={styles.label}>{label}</span>
+        {showRelative
+          ? formatData(primary.data - data, true)
+          : formatData(data)}
+        {label && <span css={[styles.label, css`margin-left: 5px;`]}>{label}</span>}
       </div>
     ))
     return (
