@@ -21,12 +21,19 @@ export const data = {
   }],
 }
 
-storiesOf('Components/Charts', module)
+storiesOf('Components/Charts/BigNumber', module)
   .add('BigNumber', () => (
     <Card
       width={number('Width', 400, { range: true, min: 100, max: 600, step: 10 })}
       height={number('Height', 400, { range: true, min: 100, max: 600, step: 10 })}>
-      <BigNumber label='Subscribers' data={data} />
+      <BigNumber data={data} />
+    </Card>
+  ))
+  .add('BigNumber - No sub-labels', () => (
+    <Card
+      width={number('Width', 400, { range: true, min: 100, max: 600, step: 10 })}
+      height={number('Height', 400, { range: true, min: 100, max: 600, step: 10 })}>
+      <BigNumber data={{ datasets: [{ data: 1010, label: 'Payment' }] }} />
     </Card>
   ))
   .addDecorator(withKnobs)

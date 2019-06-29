@@ -5,7 +5,7 @@ import { CenterMeasure } from '../Center'
 // import IconCropOriginal from 'mineral-ui-icons/IconCropOriginal'
 
 const resizeThreshold = 400
-const baseSize = 10
+const baseSize = 9
 
 const calcFontSize = contentRect => !contentRect || !contentRect.bounds
   ? baseSize
@@ -41,9 +41,9 @@ class BigNumber extends React.Component {
                   {primary.label}
                 </div>
               )}
-              <div css={styles.secondary}>
+              {secondary && secondary.length ? <div css={styles.secondary}>
                 {secondary}
-              </div>
+              </div> : null}
             </div>
           )}
         </CenterMeasure>
@@ -68,14 +68,14 @@ const styles = {
     color: #999;
     font-weight: 600;
     text-align: center; 
-    line-height: 1;
+    line-height: 1.1;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
   `,
   primaryLabel: css`
     margin-top: 0.5em;
-    font-size: 1.6em;
+    font-size: 1.5em;
   `,
   secondary: css`
     max-width: 400px;

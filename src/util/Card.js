@@ -9,6 +9,7 @@ const Container = styled.div`
   border: 1px solid #eee;
   border-radius: 3px;
   background: #fff;
+  scroll: auto;
 `
 
 function Card ({ children, width, height }) {
