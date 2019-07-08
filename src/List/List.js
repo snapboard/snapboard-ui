@@ -1,6 +1,8 @@
-// import React from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
+import map from 'lodash/map'
 import ListItem from './ListItem'
+// import ListContent from './ListContent'
 
 const celledOrDivided = ({ celled, divided }) => {
   if (!celled && !divided) return ''
@@ -51,10 +53,24 @@ const relaxed = ({ relaxed }) => {
   `
 }
 
-const List = styled.div`
+const StyledList = styled.div`
   ${celledOrDivided}
   ${relaxed}
   ${selection}
 `
 
-export default List
+export default function List ({ data, children, ...props }) {
+  let childEl = children
+  if (data) {
+    childEl = map(data, ({ title, subtitle, image, button }) => {
+      return (
+        <ListItem>{title}</ListItem>
+      )
+    })
+  }
+  return (
+    <StyledList {...props}>
+      {childEl}
+    </StyledList>
+  )
+}

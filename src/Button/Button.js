@@ -7,6 +7,11 @@ const blockProp = props => props.block && 'width: 100%;'
 const disabledProp = props => props.disabled && `
   cursor: default;
   opacity: 0.6;
+  background: #f3f3f3;
+  color: #777;
+  &:hover {
+    color: #777;
+  }
 `
 
 const colorProp = props => {
@@ -15,17 +20,35 @@ const colorProp = props => {
   const active = props.active ? `
     background-color: ${color(base).darken(0.15)};
   ` : ''
+  if (props.primary) {
+    return `
+      background-color: ${base};
+      &:hover {
+        background-color: ${color(base).darken(0.07)};
+      }
+      &:active {
+        background-color: ${color(base).darken(0.15)};
+      }
+      ${active}
+    `
+  }
   return `
-    background-color: ${base};
+    color: ${props.faded ? '#999' : base};
+    border: 1px solid #eee;
     &:hover {
-      background-color: ${color(base).darken(0.07)};
+      background-color: #f8f8f8;
+      color: ${base};
     }
     &:active {
-      background-color: ${color(base).darken(0.15)};
+      background-color: #f3f3f3;
+      color: ${base};
     }
-    ${active}
   `
 }
+
+const minimalProp = props => props.minimal && `
+  border: 1px solid transparent;
+`
 
 const sizeProp = props => ({
   lg: `
@@ -38,6 +61,12 @@ const sizeProp = props => ({
     padding: .25rem .5rem;
     font-size: .875em;
     line-height: 1.5;
+    border-radius: .2rem;
+  `,
+  xs: `
+    padding: .15rem .4rem;
+    font-size: .75em;
+    line-height: 1.3;
     border-radius: .2rem;
   `,
 }[props.size])
@@ -64,8 +93,11 @@ const caretProp = props => props.caret && `
 * <Button>Test</Button>
 */
 const Button = styled.button`
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 
+  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", 
+  "Helvetica Neue", sans-serif;
   display: inline-block;
-  font-weight: 400;
+  font-weight: 600;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -88,6 +120,7 @@ const Button = styled.button`
   ${blockProp}
   ${disabledProp}
   ${caretProp}
+  ${minimalProp}
 `
 
 export default Button

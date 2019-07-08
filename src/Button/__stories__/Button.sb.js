@@ -24,6 +24,43 @@ storiesOf('Components/Button', module)
     </Container>
   ))
 
+  .add('Primary', () => (
+    <Container>
+      <Button primary>Default</Button>
+      <Button primary color='primary'>Primary</Button>
+      <Button primary color='secondary'>Secondary</Button>
+      <Button primary color='success'>Success</Button>
+      <Button primary color='info'>Info</Button>
+      <Button primary color='warning'>Warning</Button>
+      <Button primary color='danger'>Danger</Button>
+    </Container>
+  ))
+
+  .add('Minimal', () => (
+    <Container>
+      <Button minimal>Default</Button>
+      <Button minimal color='primary'>Primary</Button>
+      <Button minimal color='secondary'>Secondary</Button>
+      <Button minimal color='success'>Success</Button>
+      <Button minimal color='info'>Info</Button>
+      <Button minimal color='warning'>Warning</Button>
+      <Button minimal color='danger'>Danger</Button>
+    </Container>
+  ))
+
+  .add('Faded', () => (
+    <Container>
+      <Button faded>Default</Button>
+      <Button faded minimal>Default</Button>
+      <Button faded color='primary'>Primary</Button>
+      <Button faded color='secondary'>Secondary</Button>
+      <Button faded color='success'>Success</Button>
+      <Button faded color='info'>Info</Button>
+      <Button faded color='warning'>Warning</Button>
+      <Button faded color='danger'>Danger</Button>
+    </Container>
+  ))
+
   .add('Block', () => (
     <Container>
       <Button block>Default</Button>
@@ -41,7 +78,8 @@ storiesOf('Components/Button', module)
       <Button>Default</Button>
       <Button size='lg'>Large</Button>
       <Button size='md'>Medium</Button>
-      <Button size='sm'>small</Button>
+      <Button size='sm'>Small</Button>
+      <Button size='xs'>Extra Small</Button>
     </Container>
   ))
 
