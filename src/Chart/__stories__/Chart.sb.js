@@ -31,6 +31,13 @@ storiesOf('Components/Charts/Chart', module)
       <Chart type='bar' data={data} />
     </Card>
   ))
+  .add('Chart - Line', () => (
+    <Card
+      width={number('Width', 400, { range: true, min: 100, max: 600, step: 10 })}
+      height={number('Height', 400, { range: true, min: 100, max: 600, step: 10 })}>
+      <Chart type='line' data={data} />
+    </Card>
+  ))
   .add('Chart - Doughnut', () => (
     <Card
       width={number('Width', 400, { range: true, min: 100, max: 600, step: 10 })}
