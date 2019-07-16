@@ -14,6 +14,6 @@ const types = {
 }
 
 export default function Chart ({ type, ...props }) {
-  const Component = type[types]
+  const Component = types[type]
   return <Component {...props} />
 }

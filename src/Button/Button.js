@@ -99,6 +99,7 @@ const Button = styled.button`
   display: inline-block;
   font-weight: 600;
   text-align: center;
+  background-color: #fff;
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;

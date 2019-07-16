@@ -24,7 +24,7 @@ export const data = {
   labels: ['Impressions', 'Add To Cart', 'Buy'],
   datasets: [{
     label: 'Direct',
-    data: [3500, 2500, 6500],
+    data: [6500, 2500, 1500],
     // color: '#FFB178',
   }, {
     label: 'Social Media',
@@ -33,6 +33,10 @@ export const data = {
   }, {
     label: 'Ads',
     data: [600, 200, 130],
+    // color: '#A0F9FF',
+  }, {
+    label: 'Music',
+    data: [100, 50, 20],
     // color: '#A0F9FF',
   }],
 }

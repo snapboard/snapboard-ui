@@ -24,6 +24,14 @@ class Funnel extends React.Component {
   onRef = (ref) => {
     if (!this.ref) {
       const options = this.props.options || {}
+      console.log({
+        container: '.funnel',
+        ...defaults,
+        data: this.format(this.props.data),
+        width: this.props.width || this.size.width,
+        height: this.props.height || this.size.height,
+        ...options,
+      })
       this.graph = new FunnelGraph({
         container: '.funnel',
         ...defaults,
@@ -56,7 +64,7 @@ class Funnel extends React.Component {
   }
 
   format = ({ labels, datasets }) => {
-    const values = datasets.map(({ data }) => data)
+    const values = invert(datasets.map(({ data }) => data))
     const colors = datasets.map(({ backgroundColor }) => getColors(backgroundColor))
     const subLabels = datasets.map(({ label }) => label)
     return {
@@ -78,6 +86,14 @@ class Funnel extends React.Component {
     }
     return el
   }
+}
+
+function invert (data) {
+  return data[0].map((_, i) => {
+    return data.map((_, y) => {
+      return data[y][i]
+    })
+  })
 }
 
 export default withColors({ solid: true })(Funnel)
