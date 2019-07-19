@@ -11,7 +11,9 @@ const calcFontSize = contentRect => !contentRect || !contentRect.bounds
   ? baseSize
   : calSize(contentRect.bounds.width)
 const calSize = dimention => dimention > resizeThreshold ? baseSize : dimention / resizeThreshold * baseSize
-const formatNumber = (data, showPlus) => numeral(data).format(`${(showPlus && '+') || ''}0.[00]a`)
+const formatNumber = (data, showPlus) => isNaN(numeral(data).value()) || numeral(data).value() === null
+  ? data
+  : numeral(data).format(`${(showPlus && '+') || ''}0.[00]a`)
 
 function BigNumber ({ data, number, label, ...rest }) {
   const normalized = normalizeData({ data, number, label })
@@ -102,7 +104,7 @@ function SingleDataset ({ data, showRelative }) {
 
 function normalizeData (props) {
   const { data, number, label } = props || {}
-  if (!data && number) {
+  if (!data && number !== undefined) {
     return { labels: [label], datasets: [{ data: [number] }] }
   }
   return data
