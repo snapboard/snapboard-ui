@@ -11,9 +11,9 @@ const calcFontSize = contentRect => !contentRect || !contentRect.bounds
   ? baseSize
   : calSize(contentRect.bounds.width)
 const calSize = dimention => dimention > resizeThreshold ? baseSize : dimention / resizeThreshold * baseSize
-const formatNumber = (data, showPlus) => isNaN(numeral(data).value()) || numeral(data).value() === null
+const formatNumber = (data, prefix = '') => isNaN(numeral(data).value()) || numeral(data).value() === null
   ? data
-  : numeral(data).format(`${(showPlus && '+') || ''}0.[00]a`)
+  : numeral(data).format(`${(prefix) || ''}0.[00]a`)
 
 function BigNumber ({ data, number, label, ...rest }) {
   const normalized = normalizeData({ data, number, label })
@@ -22,23 +22,26 @@ function BigNumber ({ data, number, label, ...rest }) {
   return <MultiDataset data={normalized} {...rest} />
 }
 
-function MultiDataset ({ data, showRelative }) {
+function MultiDataset ({ data, showRelative, prefix }) {
   const { datasets = [], labels = [] } = data
   const size = labels && labels.length ? labels.length : 1
   const datasetsEl = datasets.map((dataset) => {
     const primaryNumber = dataset.data[size - 1]
+    const hasMainPrimaryLabel = dataset.data.length === labels.length
     const datapointsEl = dataset.data.slice(0).reverse().map((number, i) => {
-      const label = labels.slice(0).reverse()[i]
+      const label = hasMainPrimaryLabel
+        ? labels.slice(0).reverse()[i]
+        : labels.slice(0).concat([null]).reverse()[i]
       return (
         <ListContent vcenter>
-          <div css={[styles.stat, css`text-align: left; padding: 0;`]}>
+          <div css={[styles.stat, css`text-align: left; padding: 0;`, label ? '' : css`font-size: 2em;`]}>
             {showRelative
-              ? formatNumber(primaryNumber - number, true)
-              : formatNumber(number)}
+              ? formatNumber(primaryNumber - number, '+')
+              : formatNumber(number, i !== 0 ? prefix : '')}
           </div>
-          <div css={[styles.label, css`text-align: left; font-size: 0.9em;`]}>
+          {label && <div css={[styles.label, css`text-align: left; font-size: 0.9em;`]}>
             {label}
-          </div>
+          </div>}
         </ListContent>
       )
     })
@@ -60,21 +63,22 @@ function MultiDataset ({ data, showRelative }) {
   )
 }
 
-function SingleDataset ({ data, showRelative }) {
+function SingleDataset ({ data, showRelative, prefix }) {
   const { datasets = [], labels = [] } = data
-  const size = labels && labels.length ? labels.length : 1
   const dataset = datasets[0]
+  const size = dataset.data.length
+  const hasMainPrimaryLabel = dataset.data.length === labels.length
   const primaryNumber = dataset.data[size - 1]
-  const primaryLabel = dataset.label && labels[size - 1]
+  const primaryLabel = hasMainPrimaryLabel
     ? `${dataset.label} - ${labels[size - 1]}`
-    : labels[size - 1] || dataset.label
-  const secondary = size > 2 ? dataset.data.slice(0, size - 1).map((number, i) => {
+    : dataset.label
+  const secondary = dataset.data.length > 1 ? dataset.data.slice(0, size - 1).map((number, i) => {
     const label = labels[i]
     return (
       <div css={styles.stat}>
         {showRelative
-          ? formatNumber(primaryNumber - number, true)
-          : formatNumber(number)}
+          ? formatNumber(primaryNumber - number, '+')
+          : formatNumber(number, prefix)}
         {label && <span css={[styles.label, css`margin-left: 5px;`]}>{label}</span>}
       </div>
     )
@@ -138,7 +142,7 @@ const styles = {
   secondary: css`
     max-width: 400px;
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 5%;
     display: flex;
     flex-wrap: wrap;
     padding: 0 0.3em;

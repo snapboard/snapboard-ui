@@ -32,11 +32,28 @@ storiesOf('Components/Charts/BigNumber', module)
       <BigNumber data={data} />
     </Card>
   ))
+  .add('BigNumber - No primary label', () => (
+    <Card
+      width={number('Width', 400, { range: true, min: 100, max: 600, step: 10 })}
+      height={number('Height', 400, { range: true, min: 100, max: 600, step: 10 })}>
+      <BigNumber data={{
+        labels: ['Month', 'Week', 'Today'],
+        datasets: data.datasets,
+      }} />
+    </Card>
+  ))
   .add('BigNumber - Show Relative', () => (
     <Card
       width={number('Width', 400, { range: true, min: 100, max: 600, step: 10 })}
       height={number('Height', 400, { range: true, min: 100, max: 600, step: 10 })}>
       <BigNumber showRelative data={data} />
+    </Card>
+  ))
+  .add('BigNumber - Prefix', () => (
+    <Card
+      width={number('Width', 400, { range: true, min: 100, max: 600, step: 10 })}
+      height={number('Height', 400, { range: true, min: 100, max: 600, step: 10 })}>
+      <BigNumber data={data} prefix='+' />
     </Card>
   ))
   .add('BigNumber - Basic', () => (
@@ -72,6 +89,16 @@ storiesOf('Components/Charts/BigNumber', module)
       width={number('Width', 400, { range: true, min: 100, max: 600, step: 10 })}
       height={number('Height', 400, { range: true, min: 100, max: 600, step: 10 })}>
       <BigNumber data={multiDatsets} />
+    </Card>
+  ))
+  .add('BigNumber - Multiple datasets - No primary label', () => (
+    <Card
+      width={number('Width', 400, { range: true, min: 100, max: 600, step: 10 })}
+      height={number('Height', 400, { range: true, min: 100, max: 600, step: 10 })}>
+      <BigNumber prefix='+' data={{
+        labels: ['Month', 'Week', 'Today'],
+        datasets: multiDatsets.datasets,
+      }} />
     </Card>
   ))
   .addDecorator(withKnobs)
