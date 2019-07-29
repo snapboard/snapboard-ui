@@ -67,11 +67,11 @@ function SingleDataset ({ data, showRelative, prefix }) {
   const { datasets = [], labels = [] } = data
   const dataset = datasets[0]
   const size = dataset.data.length
-  const hasMainPrimaryLabel = dataset.data.length === labels.length
+  // const hasMainPrimaryLabel = dataset.data.length === labels.length
   const primaryNumber = dataset.data[size - 1]
-  const primaryLabel = hasMainPrimaryLabel
+  const primaryLabel = labels[size - 1] && dataset.label
     ? `${dataset.label} - ${labels[size - 1]}`
-    : dataset.label
+    : (labels[size - 1] || dataset.label || '')
   const secondary = dataset.data.length > 1 ? dataset.data.slice(0, size - 1).map((number, i) => {
     const label = labels[i]
     return (
