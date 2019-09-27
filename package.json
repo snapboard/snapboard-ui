@@ -4,10 +4,6 @@
   "description": "A grid library used for Snapboard",
   "main": "./dist/index.js",
   "module": "./dist/es/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/snapboard/snapboard-core.git"
-  },
   "scripts": {
     "start": "yarn storybook",
     "build": "yarn clean && yarn build:library",
