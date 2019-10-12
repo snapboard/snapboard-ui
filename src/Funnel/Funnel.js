@@ -24,14 +24,6 @@ class Funnel extends React.Component {
   onRef = (ref) => {
     if (!this.ref) {
       const options = this.props.options || {}
-      console.log({
-        container: '.funnel',
-        ...defaults,
-        data: this.format(this.props.data),
-        width: this.props.width || this.size.width,
-        height: this.props.height || this.size.height,
-        ...options,
-      })
       this.graph = new FunnelGraph({
         container: '.funnel',
         ...defaults,
